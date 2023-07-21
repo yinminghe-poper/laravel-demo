@@ -1,0 +1,18 @@
+version: "3"
+services:
+  app:
+    image: "heroku/heroku:22"
+    container_name: laravel-demo
+    restart: always
+    env_file:
+      - .env
+    environment:
+      HOME: /app
+      PORT: 8000
+      PATH: /app/.heroku/php/bin:/app/.heroku/php/sbin:/app/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    entrypoint: bash vendor/bin/heroku-php-apache2 public
